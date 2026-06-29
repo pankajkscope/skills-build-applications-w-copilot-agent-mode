@@ -1,5 +1,5 @@
 import express from 'express';
-import { connectDB } from "./database";
+import { connectDB } from "./config/database";
 import usersRouter from "./api/users";
 import teamsRouter from "./api/teams";
 import activitiesRouter from "./api/activities";
