@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { fetchApiList } from '../api'
 
+const activitiesEndpoint = `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/activities`
+
 function Activities() {
   const [activities, setActivities] = useState([])
   const [status, setStatus] = useState('loading')
@@ -9,7 +11,7 @@ function Activities() {
   useEffect(() => {
     let isMounted = true
 
-    fetchApiList('activities')
+    fetchApiList('activities', activitiesEndpoint)
       .then((data) => {
         if (isMounted) {
           setActivities(data)

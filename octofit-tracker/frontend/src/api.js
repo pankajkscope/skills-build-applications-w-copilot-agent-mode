@@ -39,8 +39,11 @@ export function normalizeApiList(payload) {
   return [];
 }
 
-export async function fetchApiList(resource) {
-  const response = await fetch(`${apiBaseUrl}/${resource}/`);
+export async function fetchApiList(resource, codespacesEndpoint) {
+  const resourceUrl = codespaceName && codespacesEndpoint
+    ? codespacesEndpoint
+    : `${apiBaseUrl}/${resource}/`;
+  const response = await fetch(resourceUrl);
 
   if (!response.ok) {
     throw new Error(`Failed to load ${resource}: ${response.status}`);

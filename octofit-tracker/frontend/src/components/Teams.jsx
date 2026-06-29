@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { fetchApiList } from '../api'
 
+const teamsEndpoint = `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/teams`
+
 function Teams() {
   const [teams, setTeams] = useState([])
   const [status, setStatus] = useState('loading')
@@ -9,7 +11,7 @@ function Teams() {
   useEffect(() => {
     let isMounted = true
 
-    fetchApiList('teams')
+    fetchApiList('teams', teamsEndpoint)
       .then((data) => {
         if (isMounted) {
           setTeams(data)

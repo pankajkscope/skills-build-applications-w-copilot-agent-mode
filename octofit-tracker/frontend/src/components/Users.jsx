@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { fetchApiList } from '../api'
 
+const usersEndpoint = `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/users`
+
 function Users() {
   const [users, setUsers] = useState([])
   const [status, setStatus] = useState('loading')
@@ -9,7 +11,7 @@ function Users() {
   useEffect(() => {
     let isMounted = true
 
-    fetchApiList('users')
+    fetchApiList('users', usersEndpoint)
       .then((data) => {
         if (isMounted) {
           setUsers(data)
