@@ -5,18 +5,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const users_1 = __importDefault(require("./api/users"));
+const teams_1 = __importDefault(require("./api/teams"));
+const activities_1 = __importDefault(require("./api/activities"));
+const leaderboard_1 = __importDefault(require("./api/leaderboard"));
+const workouts_1 = __importDefault(require("./api/workouts"));
+const config_1 = require("./config");
 const app = (0, express_1.default)();
-const PORT = 8000;
-const MONGODB_URI = process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/octofit_db';
 app.use(express_1.default.json());
+app.use("/api/users", users_1.default);
+app.use("/api/teams", teams_1.default);
+app.use("/api/activities", activities_1.default);
+app.use("/api/leaderboard", leaderboard_1.default);
+app.use("/api/workouts", workouts_1.default);
 app.get('/api/health', (_req, res) => {
     res.status(200).json({ status: 'ok' });
 });
+app.get("/", (_req, res) => {
+    res.json({ message: "OctoFit backend is running!", apiBaseUrl: config_1.API_BASE_URL });
+});
 async function startServer() {
     try {
-        await mongoose_1.default.connect(MONGODB_URI);
-        app.listen(PORT, () => {
-            console.log(`OctoFit backend running on port ${PORT}`);
+        await mongoose_1.default.connect(config_1.MONGODB_URI);
+        app.listen(config_1.PORT, () => {
+            console.log(`OctoFit backend running on port ${config_1.PORT}`);
+            console.log(`API base URL: ${config_1.API_BASE_URL}`);
         });
     }
     catch (error) {

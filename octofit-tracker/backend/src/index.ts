@@ -5,10 +5,9 @@ import teamsRouter from "./api/teams";
 import activitiesRouter from "./api/activities";
 import leaderboardRouter from "./api/leaderboard";
 import workoutsRouter from "./api/workouts";
+import { API_BASE_URL, MONGODB_URI, PORT } from "./config";
 
 const app = express();
-const PORT = 8000;
-const MONGODB_URI = process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/octofit_db';
 
 app.use(express.json());
 app.use("/api/users", usersRouter);
@@ -22,7 +21,7 @@ app.get('/api/health', (_req, res) => {
 });
 
 app.get("/", (_req, res) => {
-  res.send("OctoFit backend is running!");
+  res.json({ message: "OctoFit backend is running!", apiBaseUrl: API_BASE_URL });
 });
 
 async function startServer() {
@@ -30,6 +29,7 @@ async function startServer() {
     await mongoose.connect(MONGODB_URI);
     app.listen(PORT, () => {
       console.log(`OctoFit backend running on port ${PORT}`);
+      console.log(`API base URL: ${API_BASE_URL}`);
     });
   } catch (error) {
     console.error('Failed to start backend:', error);

@@ -1,8 +1,15 @@
 import { Router } from "express";
+import { User } from "../models/User";
+
 const router = Router();
 
-router.get("/", (_req, res) => {
-  res.json({ message: "Users API working!" });
+router.get("/", async (_req, res) => {
+  try {
+    const users = await User.find().sort({ name: 1 });
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to load users", error });
+  }
 });
 
 export default router;
