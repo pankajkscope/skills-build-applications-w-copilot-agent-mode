@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import { connectDB } from "./config/database";
 import usersRouter from "./api/users";
 import teamsRouter from "./api/teams";
@@ -14,6 +15,7 @@ const expectedCodespacesUrl = CODESPACE_NAME
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use("/api/users", usersRouter);
 app.use("/api/teams", teamsRouter);

@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
 const database_1 = require("./config/database");
 const users_1 = __importDefault(require("./api/users"));
 const teams_1 = __importDefault(require("./api/teams"));
@@ -16,6 +17,7 @@ const expectedCodespacesUrl = CODESPACE_NAME
     ? `https://${CODESPACE_NAME}-8000.app.github.dev`
     : undefined;
 const app = (0, express_1.default)();
+app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use("/api/users", users_1.default);
 app.use("/api/teams", teams_1.default);
