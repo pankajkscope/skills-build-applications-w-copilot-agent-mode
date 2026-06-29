@@ -1,0 +1,39 @@
+:root {
+  --app-bg: #f4f0e8;
+  --surface: rgba(255, 255, 255, 0.86);
+  --surface-strong: #d8ebe1;
+  --ink: #17352d;
+  --muted: #66736e;
+  --line: rgba(23, 53, 45, 0.16);
+  --accent: #bd5b32;
+  --shadow: 0 14px 40px rgba(39, 49, 43, 0.08);
+  font-family: Avenir Next, Avenir, Trebuchet MS, sans-serif;
+  color: var(--ink);
+  background: var(--app-bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100svh;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+code {
+  color: var(--ink);
+  font-size: 0.78rem;
+}
