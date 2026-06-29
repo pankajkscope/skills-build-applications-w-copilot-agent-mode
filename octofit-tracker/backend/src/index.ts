@@ -5,7 +5,7 @@ import teamsRouter from "./api/teams";
 import activitiesRouter from "./api/activities";
 import leaderboardRouter from "./api/leaderboard";
 import workoutsRouter from "./api/workouts";
-import { API_BASE_URL, MONGODB_URI, PORT } from "./config";
+import { API_BASE_URL, PORT } from "./config";
 
 const app = express();
 
