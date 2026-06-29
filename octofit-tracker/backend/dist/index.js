@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const mongoose_1 = __importDefault(require("mongoose"));
+const database_1 = require("./database");
 const users_1 = __importDefault(require("./api/users"));
 const teams_1 = __importDefault(require("./api/teams"));
 const activities_1 = __importDefault(require("./api/activities"));
@@ -26,14 +26,14 @@ app.get("/", (_req, res) => {
 });
 async function startServer() {
     try {
-        await mongoose_1.default.connect(config_1.MONGODB_URI);
+        await (0, database_1.connectDB)();
         app.listen(config_1.PORT, () => {
             console.log(`OctoFit backend running on port ${config_1.PORT}`);
             console.log(`API base URL: ${config_1.API_BASE_URL}`);
         });
     }
     catch (error) {
-        console.error('Failed to start backend:', error);
+        console.error("Failed to start backend:", error);
         process.exit(1);
     }
 }

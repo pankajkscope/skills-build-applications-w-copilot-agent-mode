@@ -1,5 +1,5 @@
 import express from 'express';
-import mongoose from 'mongoose';
+import { connectDB } from "./database";
 import usersRouter from "./api/users";
 import teamsRouter from "./api/teams";
 import activitiesRouter from "./api/activities";
@@ -26,13 +26,13 @@ app.get("/", (_req, res) => {
 
 async function startServer() {
   try {
-    await mongoose.connect(MONGODB_URI);
+    await connectDB();
     app.listen(PORT, () => {
       console.log(`OctoFit backend running on port ${PORT}`);
       console.log(`API base URL: ${API_BASE_URL}`);
     });
   } catch (error) {
-    console.error('Failed to start backend:', error);
+    console.error("Failed to start backend:", error);
     process.exit(1);
   }
 }
